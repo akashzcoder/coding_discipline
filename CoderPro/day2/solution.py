@@ -26,4 +26,3 @@ class Solution:
         if ransomNote == ''.join(ran):
             return True
         return False
-
