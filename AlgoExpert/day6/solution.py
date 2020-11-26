@@ -7,10 +7,7 @@ def sameBsts(arrayOne, arrayTwo):
     elif arrayOne[0] != arrayTwo[0] or len_arr1 != len_arr2:
         return False
     ele = arrayOne[0]
-    aux1_s = []
-    aux1_l = []
-    aux2_s = []
-    aux2_l = []
+    aux1_s, aux1_l, aux2_s, aux2_l = [], [], [], []
     for i in range(1, len_arr1):
         if arrayOne[i] < ele:
             aux1_s.append(arrayOne[i])
