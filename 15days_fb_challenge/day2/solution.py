@@ -45,3 +45,51 @@ class Solution:
                 num = num * 10 + int(ch)
 
         return self._in_range(sign * num)
+
+
+# Validation of float number
+class Solution:
+    def isNumber(self, s: str) -> bool:
+
+        state_dict = {
+            1: {'num': 2, 'sign': 3, 'dot': 10},
+            2: {'num': 2, 'dot': 4, 'e': 5, 'final': 6},
+            3: {'num': 2, 'dot': 10},
+            4: {'num': 9, 'final': 6, 'e': 5},
+            5: {'num': 7, 'sign': 8},
+            7: {'num': 7, 'final': 6},
+            8: {'num': 7},
+            6: {},
+            9: {'e': 5, 'num': 9, 'final': 6},
+            10: {'num': 9}
+        }
+        cur_state = 1
+
+        s = s.strip()
+
+        if len(s) == 1 and s[0] == '.':
+            return False
+
+        for ch in s:
+            if ch in '0123456789':
+                state = 'num'
+            elif ch in 'e':
+                state = 'e'
+                flag_e = True
+            elif ch in '+-':
+                state = 'sign'
+            elif ch in '.':
+                state = 'dot'
+            else:
+                state = 'unknown'
+
+            if state not in state_dict[cur_state]:
+                return False
+
+            cur_state = state_dict[cur_state][state]
+
+        if 'final' in state_dict[cur_state]:
+            return True
+
+        return False
+
