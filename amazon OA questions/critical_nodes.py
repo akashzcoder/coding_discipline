@@ -14,8 +14,11 @@ class Graph:
         self.graph[v].append(u)
 
     def APUtil (self, u, visited, ap, parent, low, disc):
+
+        # Count of children in current node
         children = 0
 
+        # Mark the current node as visited and print it
         visited[u] = True
 
         # Initialize discovery time and low value
@@ -82,3 +85,14 @@ def findCriticalNodes (nodeNum, edges):
         graph.addEdge(edge[0], edge[1])
 
     return graph.AP()
+
+
+"""
+
+A O(V+E) algorithm to find all Articulation Points (APs)
+The idea is to use DFS (Depth First Search). In DFS, we follow vertices in tree form called DFS tree. In DFS tree, a vertex u is parent of another vertex v, if v is discovered by u (obviously v is an adjacent of u in graph). In DFS tree, a vertex u is articulation point if one of the following two conditions is true.
+1) u is root of DFS tree and it has at least two children.
+2) u is not root of DFS tree and it has a child v such that no vertex in subtree rooted with v has a back edge to one of the ancestors (in DFS tree) of u.
+
+In the proposed approach we use DFS traversal in a given graph 
+"""
